@@ -1,7 +1,11 @@
+#!/usr/bin/env python
+
 import subprocess
 
-interface = "eth0"
-new_mac = "22:54:78:22:22:88"
+from pip._vendor.distlib.compat import raw_input
+
+interface = raw_input("Interface > ")
+new_mac = raw_input("New MAC > ")
 
 print("[+] changing MAC address for " + interface + "to " + new_mac)
 
