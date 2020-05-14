@@ -2,6 +2,7 @@
 
 import subprocess
 import optparse
+import re
 
 def get_arguments():
     prs = optparse.OptionParser()
@@ -25,4 +26,9 @@ options = get_arguments()
 change_mac(options.interface, options.new_mac)
 result = subprocess.check_output(["ifconfig", options.interface])
 print(result)
+captured_mac = re.search(r"\w\w:\w\w:\w\w:\w\w:\w\w:\w\w", result)
 
+if captured_mac:
+    print("[*] New MAC address: " + captured_mac.group(0))
+else:
+    print("[*] Error - could not read MAC address.")
